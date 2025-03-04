@@ -1,24 +1,24 @@
 const cislo = Number(prompt('Zadej číslo (0 - 36):'));
 
-if (cislo <= 36) {
-    document.body.innerHTML += '<p> Zadej číslo (0 - 36): ' + cislo +  '</p>';
-}
-
-if (cislo === 0) {
-    document.body.innerHTML += "Nula.";
-}
-
-const jeSude = cislo % 2 === 0;
-const sudeLiche = jeSude ? "sudé" : "liché";
-
-let barva; // deklarace promenne
-
-if (jeSude) {
-    barva = "černá";
+if (isNaN(cislo) || cislo < 0 || cislo > 36) {
+    document.body.innerHTML = '<p>Neplatné číslo. Zadejte celé číslo v rozmezí 0-36.</p>';
 } else {
-    barva = "červená";
+    let barva;
+    let sudeLiche;
+
+    if (cislo === 0) {
+        barva = "zelená";
+        sudeLiche = "0";
+    } else {
+        const jeSude = cislo % 2 === 0;
+        sudeLiche = jeSude ? "sudé" : "liché";
+
+        if ((cislo >= 1 && cislo <= 10) || (cislo >= 19 && cislo <= 28)) {
+            barva = jeSude ? "černá" : "červená";
+        } else {
+            barva = jeSude ? "červená" : "černá";
+        }
+    }
+
+    document.body.innerHTML = `Číslo ${cislo} je ${sudeLiche} a ${barva}.`;
 }
-
-
-document.body.innerHTML = `Číslo ${cislo} je ${sudeLiche} a ${barva}.`;
-
